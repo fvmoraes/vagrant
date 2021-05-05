@@ -3,7 +3,7 @@
 ### Disponibilização de arquivos utilizados e apresentação.
 
 ### Pesquisa de âmbito acadêmico.
-Esta pesquisa foi efetuada para uma oficina acadêmica denominada NUPETI. Aonde um tema correlacionado a área de infraestrutura de TI é proposto para estudo, e posteriormente apresentado a um grupo de colegas e professores.
+Esta pesquisa foi efetuada para uma oficina acadêmica denominada NUPETI, onde um tema correlacionado a área de infraestrutura de TI é proposto para estudo, e posteriormente apresentado a um grupo de colegas e professores.
 
 ## Casos de estudo.
 - Zabbix e Grafana provisionados em ambiente virtual com Vagrant.
