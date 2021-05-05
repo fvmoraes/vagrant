@@ -1,0 +1,46 @@
+# INICIO DA CONFIGURAÇÃO COM A VERSÃO "2" DO VAGRANT
+Vagrant.configure("2") do |config|
+# CONFIGURAÇÃO DO SO DA BOX
+  config.vm.box = "ubuntu/bionic64"
+# CONFIGURAÇÃO DE ENCAMINHAMENTO DE PORTAS DE REDE
+  config.vm.network "forwarded_port", guest: 80, host: 8080, protocol: tcp/udp
+  config.vm.usable_port_range = 3000..3100
+# CONFIGURAÇÃO DE REDE PRIVADA (Acesso interno outras VMS)
+  config.vm.network "private_network", ip: "10.0.0.10"
+# CONFIGURAÇÃO DE REDE PUBLICA (Acesso externo qualquer da rede do host)
+  config.vm.network "public_network", type: dhcp
+# CONFIGURAÇÃO DE LOCAIS DE TROCA DE ARQUIVOS, ORIGEM E DESTINO
+  config.vm.synced_folder "www/", "/var/wwww"
+# CONFIGURAÇÃO DO PROVINDER (memoria, cpu)
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "8056"
+    vb.cpus = 4
+# CONFIGURAÇÃO DO PROVINDER (nome)
+        config.vm.provider :virtualbox do |vb|
+        vb.name = "ubuntu_sample"
+        end
+  end
+# SCRIPT PARA PROVISIONAR COM A VM (Apenas na primeira vez)
+  config.vm.provision "shell", path: "script.sh"
+# COMANDO PARA PROVISIONAR A VM
+  config.vm.provision "shell", inline: "echo Olá, Mundo!"
+
+##################################################################################
+
+# MULTIPLAS VMs COM CONFIGURAÇÕES DIFERENTES
+
+# PARA DEBIAN NA PORTA 4080
+  config.vm.define "vm_01" do |vm01|
+	vm01.vm.box = "debian/jessie64"
+        vm01.vm.network "forwarded_port", guest: 80, host: 4080, protocol: tcp/udp
+        vm01.vm.network "public_network", type: dhcp
+  end
+
+# PARA CENTOS NA PORTA 8080
+  config.vm.define "vm_02" do |vm02|
+        vm02.vm.box = "centos/7"
+	vm02.vm.network "forwarded_port", guest: 80, host: 8080, protocol: tcp/udp
+	vm02.vm.network "public_network", type: dhcp
+  end
+  
+end
